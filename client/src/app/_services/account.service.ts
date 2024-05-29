@@ -1,8 +1,8 @@
-import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { User } from '../_models/user'
+import { User } from '../_models/user';
+//import { RegisterDto } from '../_models/register-dto';
 
 @Injectable({
   providedIn: 'root'
