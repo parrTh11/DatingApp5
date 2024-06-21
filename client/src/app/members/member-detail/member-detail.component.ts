@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
@@ -20,7 +20,7 @@ import { MemberMessagesComponent } from 'src/app/messages/member-messages/member
   standalone : true,
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css'],
-  imports : [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
+  imports : [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent, DatePipe]
 })
 export class MemberDetailComponent implements OnInit, OnDestroy{
   @ViewChild('memberTabs', {static : true}) memberTabs? : TabsetComponent

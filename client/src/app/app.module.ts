@@ -18,10 +18,8 @@ import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
-import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptor/loading.interceptor';
 import { JwtInterceptor } from './_interceptor/jwt.interceptor';
-import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
@@ -32,6 +30,8 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { RouteReuseStrategy } from '@angular/router';
 import { CutomeRouteReuseStretegy } from './_services/CustomRouteReuserStrategy';
 import { ConfimDialogComponent } from './modals/confim-dialog/confim-dialog.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +46,6 @@ import { ConfimDialogComponent } from './modals/confim-dialog/confim-dialog.comp
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
-    MemberEditComponent,
-    PhotoEditorComponent,
     TextInputComponent,
     DatePickerComponent,
     AdminPanelComponent,
@@ -55,7 +53,8 @@ import { ConfimDialogComponent } from './modals/confim-dialog/confim-dialog.comp
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfimDialogComponent,
+    MemberEditComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,8 +73,7 @@ import { ConfimDialogComponent } from './modals/confim-dialog/confim-dialog.comp
       provide : HTTP_INTERCEPTORS, useClass : JwtInterceptor, multi: true
     },
     {provide : HTTP_INTERCEPTORS, useClass : LoadingInterceptor, multi: true},
-    {provide : RouteReuseStrategy, useClass : CutomeRouteReuseStretegy}
-
+    {provide : RouteReuseStrategy, useClass : CutomeRouteReuseStretegy},
   ],
   bootstrap: [AppComponent]
 })

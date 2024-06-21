@@ -46,9 +46,16 @@ namespace API.Controllers
         [HttpGet("{username}")] // api/users/'username'
         public async Task<ActionResult<MemberDto>> GetUser(string username){
 
-            return await _uow.userRepository.GetMemberAsync(username);
-            //var user = await _uow.userRepository.GetUserByUsernameAsync(username);
-            // return _mapper.Map<MemberDto>(user);
+            // return await _uow.userRepository.GetMemberAsync(username);
+            // //var user = await _uow.userRepository.GetUserByUsernameAsync(username);
+            // // return _mapper.Map<MemberDto>(user);
+
+            var currentUsername = User.GetUsername();
+            var user = await _uow.userRepository.GetMemberAsync(currentUsername);
+
+            if (user == null) return NotFound();
+
+            return user;
         }
 
         [HttpPut]
