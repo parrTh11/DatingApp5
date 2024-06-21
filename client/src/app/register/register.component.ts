@@ -3,6 +3,7 @@ import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PresenceService } from '../_services/presence.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit{
   
   constructor(private accountServices : AccountService, private toastr : ToastrService,
     private fb : FormBuilder,
-    private router : Router
+    private router : Router,
+    public presenceService : PresenceService
   ){}
 
   ngOnInit(): void {

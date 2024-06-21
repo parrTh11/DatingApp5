@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { UserParams } from '../_models/UserParams';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { map, of } from 'rxjs';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members : Member[] = [];
+  memberCache = new Map();
   // paginatedResult : PaginatedResult<Member []> = new PaginatedResult<Member[]>;
 
 
@@ -19,6 +21,11 @@ export class MembersService {
 
   getMembers(userParams : UserParams){
     // if(this.members.length > 0) return of(this.members);
+    const responce = this.memberCache.get(Object.values(userParams).join('-'));
+
+    if(responce) return of(responce);
+
+
     let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
 
     params = params.append('minAge', userParams.minAge);
@@ -27,27 +34,19 @@ export class MembersService {
     params = params.append('orderBy',userParams.orderBy);
 
 
-    return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http)
+    return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http).pipe(
+      map(responce => {
+        this.memberCache.set(Object.values(userParams).join('-'), responce);
+        return responce;
+      })
+    )
   }
 
   
 
   getMember(username : string){
-    //const member = this.members.find(x => x.userName === username);
-    //if(member) return of(this.members);
-    return this.http.get<Member>(this.baseUrl + 'users/' + username/*, this.getHttpOptions()*/);
+    return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
-
-  // getHttpOptions(){
-  //   const userString = localStorage.getItem('user');
-  //   if(!userString) return;
-  //   const user = JSON.parse(userString);
-  //   return {
-  //     headers : new HttpHeaders({
-  //       Authorization : 'Bearer ' + user.token
-  //     })
-  //   }
-  // }
 
   updateMember(member : Member){
     return this.http.put(this.baseUrl + 'users', member)

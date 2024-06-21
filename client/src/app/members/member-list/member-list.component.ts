@@ -34,11 +34,10 @@ export class MemberListComponent implements OnInit{
     this.loadMembers();
   }
 
-  loadMembers(){
+  loadMembers(){ 
     if(!this.userParams) return; 
     this.memberServices.getMembers(this.userParams).subscribe({
-      // next : (members: any) => this.members = members,
-      next : response => {
+      next : response => { 
         if(response.result && response.pagination){
           this.members = response.result;
           this.pagination = response.pagination;
@@ -48,7 +47,7 @@ export class MemberListComponent implements OnInit{
   }
 
   pageChanged(event : any){
-    if(this.userParams && this.userParams?.pageNumber != event.page){
+    if(this.userParams && this.userParams?.pageNumber !== event.page){
       this.userParams.pageNumber = event.page;
       this.loadMembers();
     }

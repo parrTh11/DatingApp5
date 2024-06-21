@@ -24,6 +24,14 @@ import { JwtInterceptor } from './_interceptor/jwt.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CutomeRouteReuseStretegy } from './_services/CustomRouteReuserStrategy';
+import { ConfimDialogComponent } from './modals/confim-dialog/confim-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +50,12 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
     PhotoEditorComponent,
     TextInputComponent,
     DatePickerComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    RolesModalComponent,
+    ConfimDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +74,7 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
       provide : HTTP_INTERCEPTORS, useClass : JwtInterceptor, multi: true
     },
     {provide : HTTP_INTERCEPTORS, useClass : LoadingInterceptor, multi: true},
-    {provide : NG_VALUE_ACCESSOR, useClass : FormControl, multi: true}
+    {provide : RouteReuseStrategy, useClass : CutomeRouteReuseStretegy}
 
   ],
   bootstrap: [AppComponent]

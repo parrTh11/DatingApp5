@@ -13,3 +13,13 @@
     /* background-color: #fff; */
     border-top: none
 }
+
+@keyframes fa-blink {
+    0% {opacity: 1;}
+    100% {opacity: 0.4;}
+}
+
+.fa-user, .mb-2{
+    animation: fa-blink 1.5s linear infinite;
+    color: rgb(247, 6, 6);
+}
